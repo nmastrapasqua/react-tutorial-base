@@ -1,9 +1,38 @@
 import React from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { FaLockOpen } from "react-icons/fa";
 import styled from "styled-components";
+import { useGlobalContext } from "./context";
 import { links, SocialBar } from "./links";
+
 const Sidebar = () => {
-  return <aside>Sidebar</aside>;
+  const { isSidebarOpen, closeSidebar } = useGlobalContext();
+  return (
+    <Wrapper className={`${isSidebarOpen ? "show-sidebar" : ""}`}>
+      <div className="sidebar-content">
+        <header>
+          <div className="nav-brand">
+            <h4>Sidebar</h4>
+          </div>
+          <button className="btn btn-delete" onClick={closeSidebar}>
+            <AiFillCloseCircle className="nav-icon" />
+          </button>
+        </header>
+        <ul className="sidebar-links">
+          {links.map((link) => {
+            return (
+              <li key={link.id} className="link">
+                <a href={link.url}>{link.text}</a>
+              </li>
+            );
+          })}
+        </ul>
+        <footer>
+          <SocialBar />
+        </footer>
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.aside`
