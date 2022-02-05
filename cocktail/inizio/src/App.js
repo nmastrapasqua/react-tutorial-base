@@ -7,7 +7,20 @@ import SingleCocktailScreen from "./screen/SingleCocktailScreen";
 import ErrorScreen from "./screen/ErrorScreen";
 
 function App() {
-  return <div className="App">App</div>;
+  return (
+    <Router className="App">
+      <Navbar />
+      <Sidebar />
+      <Switch>
+        <Route path="/" exact component={HomeScreen} />
+        <Route path="/about" component={AboutScreen} />
+        <Route path="/contattaci" component={ContactScreen} />
+        <Route path="/cocktail/:id" component={SingleCocktailScreen} />
+        <Route path="*" component={ErrorScreen} />
+      </Switch>
+      <Footer />
+    </Router>
+  );
 }
 
 export default App;
